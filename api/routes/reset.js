@@ -13,8 +13,11 @@ router.post('/', async (req, res, next) => {
 
         const levels = await Level.find({});
         for (const level of levels) {
-            level.users = []; 
-            await level.save(); 
+            if (level.users.length !== 0){
+                level.users = []; 
+                await level.save(); 
+            }
+            
         }
         
         res.status(200).json({ message: 'ok' });
